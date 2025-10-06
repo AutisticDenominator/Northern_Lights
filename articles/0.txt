@@ -1,0 +1,2 @@
+[name]=Let there be light!
+[content]=Hi there! This is the first article that will always show up on a fully blank search or on a search that doesnt have a proper result.

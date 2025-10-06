@@ -1,0 +1,192 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+#navigator{
+    justify-content: center;
+    display: flex;
+    font-size: 1.5vw;
+}
+
+#nav-01{
+    padding: 1vw;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    color: white;
+}
+
+#nav-02{
+    padding: 1vw;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    color: white;
+}
+
+#nav-03{
+    padding: 1vw;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    color: white;
+}
+
+#header-01-01{
+    display: flex;
+    justify-content: center;
+    font-size: 3vw;
+    margin: 0.5vw;
+    color: black;
+}
+
+#header-01-02{
+    display: flex;
+    justify-content: center;
+    font-size: 3vw;
+    margin: 0.5vw;
+    color: black;
+}
+
+#header-01-03{
+    display: flex;
+    justify-content: center;
+    font-size: 3vw;
+    margin: 0.5vw;
+    color: black;
+}
+
+
+#text-01-01{
+    display: flex;
+    justify-content: center;
+    font-size: 1.25vw;
+    margin-top: 2vh;
+    margin-bottom: 1.5vh;
+    margin-left: 15vw;
+    margin-right: 15vw;
+    padding: 1vw;
+    color: black;
+}
+
+#text-01-02{
+    display: flex;
+    justify-content: center;
+    font-size: 1.25vw;
+    margin-top: 2vh;
+    margin-bottom: 1.5vh;
+    margin-left: 15vw;
+    margin-right: 15vw;
+    padding: 1vw;
+    color: black;
+}
+
+#text-01-03{
+    display: flex;
+    justify-content: center;
+    font-size: 1.25vw;
+    margin-top: 2vh;
+    margin-bottom: 1.5vh;
+    margin-left: 15vw;
+    margin-right: 15vw;
+    padding: 1vw;
+    color: black;
+}
+
+#SC-buttons{
+    display: flex;
+    justify-content: center;
+}
+
+#Home-Search-button{
+    font-size: 1.25vw;
+    color: black;
+    padding: 1vw;
+    padding-left: 2.5vw;
+    padding-right: 2.5vw;
+    justify-content: center;
+    display: flex;
+}
+
+
+#Home-Create-button{
+    font-size: 1.25vw;
+    color: black;
+    padding: 1vw;
+    padding-left: 2.5vw;
+    padding-right: 2.5vw;
+    justify-content: center;
+    display: flex;
+}
+
+#prompt{
+    display: flex;
+    justify-content: center;
+    height: 12.5vh;
+    margin-bottom: 2.5vh;
+    font-size: 1.5vw;
+    margin-left: 25vw;
+    margin-right: 25vw;
+}
+
+#filtercheck{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2.5vh;
+    font-size: 1.5vw
+}
+
+#filter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 7.5vh;
+    margin-bottom: 2.5vh;
+    font-size: 1.5vw;
+    margin-left: 25vw;
+    margin-right: 25vw;
+}
+
+#submit-btn{
+    display: flex;
+    justify-content: center;
+    height: 10vh;
+    font-size: 1.5vw;
+}
+
+#name{
+    display: flex;
+    justify-content: center;
+    height: 12.5vh;
+    margin-bottom: 2.5vh;
+    font-size: 1.5vw;
+    margin-left: 25vw;
+    margin-right: 25vw;
+}
+
+#Subject{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 7.5vh;
+    margin-bottom: 2.5vh;
+    font-size: 1.5vw;
+    margin-left: 25vw;
+    margin-right: 25vw;
+}
+
+#content{
+    display: flex;
+    justify-content: center;
+    height: 25vh;
+    margin-bottom: 2.5vh;
+    font-size: 1.5vw;
+    margin-left: 25vw;
+    margin-right: 25vw;
+}
+
+#submit-btn-create{
+    display: flex;
+    justify-content: center;
+    height: 10vh;
+    font-size: 1.5vw;
+}

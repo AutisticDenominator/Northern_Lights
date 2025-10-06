@@ -1,0 +1,2 @@
+[name]=Let there be PRG!
+[content]=Hi there! This is the first artile for PRG, so you the search can always default to an article.

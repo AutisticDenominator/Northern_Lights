@@ -1,0 +1,2 @@
+[name]=Let there be FYZ!
+[content]=Hi there! This is the first artile for FYZ, so you the search can always default to an article.
