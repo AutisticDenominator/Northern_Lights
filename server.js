@@ -12,9 +12,9 @@ class Tools{
         if(filtercheck == 'off'){
             let index = 0;
             let valid = true;
-            let files_list = [''];
+            let files_list = new Object();;
             let list_length = 0;
-
+            
             while(valid == true){
                 try{
                     let temp_content = '';
@@ -54,6 +54,8 @@ class Tools{
                     valid = false;
                 }
             }
+
+            return files_list;
         }
         else{
             let index = 0;
@@ -86,7 +88,7 @@ class Tools{
                         }
 
                         if (prompt == temp_search) {
-                            files_list[list_length] = String(index) + '.txt';
+                            files_list[list_length] = filter + String(index) + '.txt';
                             list_length = list_length + 1;
                         }
                     }
@@ -97,6 +99,7 @@ class Tools{
                     valid = false;
                 }
             }
+            return files_list;
         }
     }
 }
@@ -148,7 +151,7 @@ http.createServer(function (req, res) {
             values[i] = temp_string;            
         }
 
-        let article_file = '';
+        let search_list = new Object();
 
         //btw radio has values on or off
         if(length(values) != 4){
