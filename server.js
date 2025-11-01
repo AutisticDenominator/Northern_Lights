@@ -155,10 +155,10 @@ http.createServer(function (req, res) {
 
         //btw radio has values on or off
         if(length(values) != 4){
-            article_file = Toolbox.Search(values[0], 'off', values[1]);
+            search_list = Toolbox.Search(values[0], 'off', values[1]);
         }
         else{
-            article_file = Toolbox.Search(values[0], values[1], values[2]);
+            search_list = Toolbox.Search(values[0], values[1], values[2]);
         }
     }
 }).listen(port);
