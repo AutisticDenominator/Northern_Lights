@@ -28,7 +28,7 @@ class Tools{
                         }
                     })
 
-                    //write code for filtering out files based on prompt
+                    //code for filtering out files based on prompt
                     
                     for(let i = 0; i < length(temp_content); i++){
                         let temp_search = '';
@@ -72,6 +72,26 @@ class Tools{
                             temp_content = data;
                         }
                     })
+
+                    for (let i = 0; i < length(temp_content); i++) {
+                        let temp_search = '';
+
+                        for (let j = i; j < (length(prompt) + i); j++) {
+                            if (j >= length(temp_content)) {
+                                break;
+                            }
+                            else {
+                                temp_search = temp_search + temp_content[j];
+                            }
+                        }
+
+                        if (prompt == temp_search) {
+                            files_list[list_length] = String(index) + '.txt';
+                            list_length = list_length + 1;
+                        }
+                    }
+
+                    index = index + 1;
                 }
                 catch(err){
                     valid = false;
