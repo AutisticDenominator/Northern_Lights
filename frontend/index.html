@@ -5,42 +5,43 @@
         <title>Northern Ligths</title>
         <meta charset="utf-8">
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
-        <link rel="stylesheet" href="stylesheet.css">
     </head>
 
-    <body>
-        <nav id="navigator" class="w3-row w3-gray">
-            <div id="nav-02" class="w3-button" onclick="Router.Route_02()">Search</div>
-            <div id="nav-01" class="w3-button w3-teal" onclick="Router.Route_01()">Northern Lights</div>
-            <div id="nav-03" class="w3-button" onclick="Router.Route_03()">Create</div>
+    <style>a{text-decoration: none;}</style>
+
+    <body style="background-color: rgb(240,240,240);">
+        <nav id="navigator" class="w3-row w3-gray w3-center" style="font-size: 2.5vh;">
+            <a id="nav-02" class="w3-button" href="/search">Search</a>
+            <a id="nav-01" class="w3-button w3-teal" href="/">Northern Lights</a>
+            <a id="nav-03" class="w3-button" href="/create">Create</a>
         </nav>
 
-        <main id="mainsite">
+        <main id="mainsite" class="w3-center w3-card-4 w3-half" style="margin-left: 25%; margin-right: 25%; padding-bottom: 5vh; background-color: white;">
             <section id="Home-article-01">
-                <div id="header-01-01" class="w3-container">Home</div>
+                <h1 id="header-01-01" class="w3-container">Home</h1>
 
-                <div id="text-01-01" class="w3-container" align="justify">Welcome to Northern Lights! A site for our school, on which you may share notes, sources and other things in a wikipidea like format. This project was developed solely by me. Thank you for visiting.</div>
+                <div id="text-01-01" class="w3-container">Welcome to Northern Lights! A site for our school, on which you may share notes, sources and other things in a wikipidea like format. This project was developed solely by me. Thank you for visiting.</div>
                 
             </section>
 
-            <section id="SC-buttons">
-                <div id="Home-Search-button" class="w3-button w3-border-white w3-hover-white w3-bottombar w3-hover-border-teal w3-hover-text-teal" onclick="Router.Route_02()">Search</div>
-                <div id="Home-Create-button" class="w3-button w3-border-white w3-hover-white w3-bottombar w3-hover-border-teal w3-hover-text-teal" onclick="Router.Route_03()">Create</div>
-            </section>
-
-            <section id="Home-article-02">
-                <div id="header-01-02" class="w3-container">Community note</div>
-                
-                <div id="text-01-02" class="w3-container">No community note as of now.</div>
+            <section id="SC-buttons" >
+                <h2 id="header-01-02" class="w3-container">Main Functions</h2>
+                <div id="text-01-02" class="w3-container">These are the main functions on this site</div>
+                <div id="Home-Search-button" style="font-size: 2.5vh;" class="w3-button w3-border-white w3-hover-white w3-bottombar w3-hover-border-teal w3-hover-text-teal">Search</div>
+                <div id="Home-Create-button" style="font-size: 2.5vh;" class="w3-button w3-border-white w3-hover-white w3-bottombar w3-hover-border-teal w3-hover-text-teal">Create</div>
             </section>
 
             <section id="Home-article-03">
-                <div id="header-01-03" class="w3-container">Disclaimer</div>
+                <h2 id="header-01-03" class="w3-container">Community note</h2>
+                
+                <div id="text-01-03" class="w3-container">No community note as of now.</div>
+            </section>
 
-                <div id="text-01-03" class="w3-container">This is not a credible source. Do not cite from this. Anything here can be incorrect.</div>
+            <section id="Home-article-04">
+                <h2 id="header-01-04" class="w3-container">Disclaimer</h2>
+
+                <div id="text-01-04" class="w3-container">This is not a credible source. Do not cite from this. Anything here can be incorrect.</div>
             </section>
         </main>
-
-        <script src="script.js"></script>
     </body>
 </html>

@@ -1,1 +1,41 @@
+<!DOCTYPE html>
 
+<html>
+    <head>
+        <title>Northern Ligths</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+    </head>
+
+    <style>a{text-decoration: none;}</style>
+
+    <body style="background-color: rgb(240,240,240);">
+        <nav id="navigator" class="w3-row w3-gray w3-center" style="font-size: 2.5vh;">
+            <a id="nav-02" class="w3-button" href="/search">Search</a>
+            <a id="nav-01" class="w3-button w3-teal" href="/">Northern Lights</a>
+            <a id="nav-03" class="w3-button" href="/create">Create</a>
+        </nav>
+
+        <main id="mainsite" class="w3-center w3-card-4 w3-half" style="margin-left: 25%; margin-right: 25%; padding-bottom: 5vh; background-color: white;">
+            <h1 id="header-03-01" class="w3-container">Create</h1>
+
+            <form>
+                <input type="text" id="form-input-03-01" placeholder="Enter Title" class="w3-input w3-border" required>
+                <input type="text" id="form-input-03-02" placeholder="Enter Content of Article" style="height: 5vh;" class="w3-input w3-border" required>
+
+                <input type="radio" name="form-radio-03-01" id="form-radio-03-01" class="w3-radio">
+                <label for="form-radio-03-01" class="w3-container">Filter?</label>
+
+                <select id="form-select-03-01" class="w3-select">
+                    <option value="CJL">CJL</option>
+                    <option value="MAT">MAT</option>
+                    <option value="PRG">PRG</option>
+                    <option value="POS">POS</option>
+                    <option value="HRW">HRW</option>
+                </select>
+
+                <input type="submit" id="form-submit-03-01" placeholder="Submit" class="w3-button w3-teal">
+            </form>
+        </main>
+    </body>
+</html>
