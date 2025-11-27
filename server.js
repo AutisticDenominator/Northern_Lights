@@ -16,4 +16,6 @@ http.createServer(function (req, res) {
         let html = fs.readFileSync('./frontend/search.html');
         res.write(html); 
     }
+
+    res.end();
 }).listen(port);
