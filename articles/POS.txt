@@ -1,0 +1,2 @@
+[name]=Let there be POS!
+[content]=Hi there! This is the first artile for POS, so you the search can always default to an article.

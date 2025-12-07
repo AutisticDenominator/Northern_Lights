@@ -1,8 +1,8 @@
 'use strict';
 const http = require('http');
 const port = process.env.PORT || 1337;
-const fs = require('fs')
-const utils = require('./utils')
+const fs = require('fs');
+const utils = require('./utils');
 
 http.createServer(function (req, res) {
     res.writeHead(200, { 'Content-Type': 'text/html' });
@@ -25,6 +25,7 @@ http.createServer(function (req, res) {
         let values = new Object({'filter-check' : 'off'});
         let temp = '';
         let temp_name = '';
+        let query_filepaths;
 
         for(let i = 7; i < length(req.url); i++){
             if(req.url == '&' || req.url == '='){
@@ -42,7 +43,7 @@ http.createServer(function (req, res) {
             }
         }
 
-        utils.Search(values['keyword'], values['filtercheck'], values['filter']);
+        query_filepaths = utils.Search(values['keyword'], values['filtercheck'], values['filter']);
     }
 
     res.end();
