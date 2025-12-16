@@ -25,7 +25,7 @@ http.createServer(function (req, res) {
         let values = new Object({'filter-check' : 'off'});
         let temp = '';
         let temp_name = '';
-        let query_filepaths;
+        let query_filepaths = new Object();
 
         for(let i = 7; i < length(req.url); i++){
             if(req.url == '&' || req.url == '='){
