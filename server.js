@@ -7,6 +7,7 @@ const utils = require('./utils');
 http.createServer(function (req, res) {
     res.writeHead(200, { 'Content-Type': 'text/html' });
     let aux_url = req.url[0] + req.url[1] + req.url[2] + req.url[3] + req.url[4] + req.url[5];
+    let ter_url = req.url[0] + req.url[1] + req.url[2] + req.url[3] + req.url[4];
 
     if(req.url == '/'){
         let html = fs.readFileSync('./frontend/index.html');
@@ -18,14 +19,12 @@ http.createServer(function (req, res) {
         let html = fs.readFileSync('./frontend/search.html');
         res.write(html); 
     }else if(aux_url == '/query'){
-        let html = fs.readFileSync('./frontend/index.html');
-        res.write(html);
-        
+        let html = '';
         let state = 0;
         let values = new Object({'filter-check' : 'off'});
         let temp = '';
         let temp_name = '';
-        let query_filepaths = new Object();
+        let query_filepaths = new Array();
 
         for(let i = 7; i < length(req.url); i++){
             if(req.url == '&' || req.url == '='){
@@ -44,6 +43,18 @@ http.createServer(function (req, res) {
         }
 
         query_filepaths = utils.Search(values['keyword'], values['filtercheck'], values['filter']);
+        html = utils.Query_Output(query_filepaths);
+        res.write(html);
+
+    }else if(ter_url == '/view'){
+        let path = '';
+
+        for(let i = 6; i < req.url.length; i++){
+            path = path + req.url[i];
+        }
+
+        let html = utils.View(path);
+        res.write(html);
     }
 
     res.end();

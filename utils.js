@@ -1,7 +1,7 @@
 const fsys = require('fs');
 
 function Search(keyword, filter_check, filter){
-    let results = new Object();
+    let results = new Array();
     let results_len = 0;
 
     if(filter_check == 'on'){
@@ -31,6 +31,8 @@ function Search(keyword, filter_check, filter){
                     break;
                 }
             }
+
+            index = index + 1;
         }
     }else{
         let file_content;
@@ -59,13 +61,102 @@ function Search(keyword, filter_check, filter){
                     break;
                 }
             }
+
+            index = index + 1;
         }
     }
     return results;
+}
+
+function Query_Output(...args){
+    let html = '';
+
+    fsys.readFileSync('./frontend/query-begin.hmtl', 'utf-8', (err, data) => {
+        if(err){
+            return 'Error'
+        }else{
+            html = data;
+        }
+    });
+
+    for(let i = 0; i < args.length; i++){
+        html = html + '\n' + '<a href="/view/' + String(args[i]) + '" class="w3-container">' + String(args[i]) + '</a>'
+    }
+
+    fsys.readFileSync('./frontend/query-end.hmtl', 'utf-8', (err, data) => {
+        if(err){
+            return 'Error'
+        }else{
+            html = data;
+        }
+    });
+
+    return html;
+}
+
+function Clean_Text(text){
+    let counter = 0;
+    let title = '';
+    let body = '';
+
+    for(let i = 0; i < text.length; i++){
+        if(counter == 2 && text[i] != '=' && text[i] != '['){
+            title = title + text[i];
+        }else if(counter == 4 && text[i] != '=' && text[i] != '['){
+            body = body + text[i];
+        }
+
+        if(text[i] == '[' || text[i] == ']'){
+            counter = counter + 1;
+        }
+    }
+
+    let output = new Array();
+    output[0] = title;
+    output[1] = body;
+
+    return output;
+}
+
+function View(path){
+    let raw_text = '';
+    let html = '';
+
+    fsys.readFileSync('./articles/' + String(path), 'utf-8', (err, data) => {
+        if(err){
+            return 'Error'
+        }else{
+            raw_text = data;
+        }
+    });
+
+    let clean_text = Clean_Text(text);
+
+    fsys.readFileSync('./frontend/view-begin.hmtl', 'utf-8', (err, data) => {
+        if(err){
+            return 'Error'
+        }else{
+            html = data;
+        }
+    });
+
+    html = html + '<h1 class="w3-container">' + clean_text[0] + '</h1>\n';
+    html = html + '<p class="w3-container">' + clean_text[1] + '</p>\n';
+
+    fsys.readFileSync('./frontend/view-end.hmtl', 'utf-8', (err, data) => {
+        if(err){
+            return 'Error'
+        }else{
+            html = data;
+        }
+    });
+
+    return html;
 }
 
 function Create(title, content, filter_check, filter){
     return;
 }
 
-module.exports = {Search, Create};
+
+module.exports = {Search, Create, Query_Output, View};
