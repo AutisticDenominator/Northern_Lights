@@ -154,9 +154,41 @@ function View(path){
     return html;
 }
 
-function Create(title, content, filter_check, filter){
-    return;
+function Create_Save(title, content, filter_check, filter){
+    if (filter_check == 'on'){
+        let index = 0;
+        let created = true;
+
+        while(created){
+            fsys.readFile('./articles/' + String(filter) + '-' + String(index), 'utf-8', (err, data) => {
+                if(err){
+                    created = false;
+                }else{
+                    index = index + 1;
+                }
+            })
+        }
+
+        let text = '[name]=' + String(title) + '\n[content]=' + String(content);
+        fsys.writeFile('./articles/' + index, text, 'utf-8');
+        
+    }else{
+        let index = 0;
+        let created = true;
+
+        while(created){
+            fsys.readFile('./articles/' + String(index), 'utf-8', (err, data) => {
+                if(err){
+                    created = false;
+                }else{
+                    index = index + 1;
+                }
+            })
+        }
+
+        let text = '[name]=' + String(title) + '\n[content]=' + String(content);
+        fsys.writeFile('./articles/' + String(index), text, 'utf-8');
+    }
 }
 
-
-module.exports = {Search, Create, Query_Output, View};
+module.exports = {Search, Create_Save ,Query_Output, View};

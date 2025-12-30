@@ -2,6 +2,7 @@
 const http = require('http');
 const port = process.env.PORT || 1337;
 const fs = require('fs');
+const qs = require('querystring');
 const utils = require('./utils');
 
 http.createServer(function (req, res) {
@@ -18,6 +19,27 @@ http.createServer(function (req, res) {
     }else if(req.url == '/search'){
         let html = fs.readFileSync('./frontend/search.html');
         res.write(html); 
+    }else if(req.url == '/creation'){
+        let RequestBody = '';
+        let valid = true;
+        req.on('data', function(data){
+            RequestBody = RequestBody + data;
+
+            if(RequestBody.length > 1e7){
+                valid = false;
+                req.url = '/tldr';
+            }
+        });
+
+        if (valid){
+            req.end('end', function(){
+                let form_data = qs.parse(RequestBody);
+                utils.Create_Save(form_data.title, form_data.content, form_data.filter_check, form_data.filter);
+
+                let html = fs.readFileSync('./frontend/index.html');
+                res.write(html);    
+            });
+        }
     }else if(aux_url == '/query'){
         let html = '';
         let state = 0;
