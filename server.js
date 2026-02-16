@@ -48,7 +48,7 @@ http.createServer(function (req, res) {
         let temp_name = '';
         let query_filepaths = new Array();
 
-        for(let i = 7; i < length(req.url); i++){
+        for(let i = 7; i < req.url.length; i++){
             if(req.url == '&' || req.url == '='){
                 state = state + 1;
 
