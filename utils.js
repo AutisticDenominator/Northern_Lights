@@ -18,7 +18,7 @@ function Search(keyword, filter_check, filter){
                 }
             });
 
-            for(let i = 0; i < (length(file_content) - length(keyword)); i++){
+            for(let i = 0; i < (file_content.length - keyword.length); i++){
                 let search_temp = '';
 
                 for(let c = i; c < (c + length(keyword)); c++){
@@ -48,7 +48,7 @@ function Search(keyword, filter_check, filter){
                 }
             });
 
-            for(let i = 0; i < (length(file_content) - length(keyword)); i++){
+            for(let i = 0; i < (file_content.length - keyword.length); i++){
                 let search_temp = '';
 
                 for(let c = i; c < (c + length(keyword)); c++){
