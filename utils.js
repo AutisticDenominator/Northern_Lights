@@ -5,7 +5,7 @@ function Search(keyword, filter_check, filter){
     let results_len = 0;
 
     if(filter_check == 'on'){
-        let file_content = "";
+        let file_content = '';
         let index = 0;
         let next = true;
 
@@ -35,8 +35,8 @@ function Search(keyword, filter_check, filter){
             index = index + 1;
         }
     }else{
-        let file_content;
-        let index = 0;
+        let file_content = '';
+	    let index = 0;
         let next = true;
 
         while(next){
