@@ -1,22 +1,52 @@
 const fsys = require('fs');
 
+class Utilities{
+    order = {
+        '' : 0,
+        'CJL' : 1,
+        'FYZ' : 2,
+        'HRW' : 3,
+        'MAT' : 4,
+        'POS' : 5,
+        'PRG' : 6,
+    }
+}
+
+const Utility = new Utilities();
+
+function Limit(filter){
+    let order = Utility.order[filter];
+    let content = fsys.readFileSync('./limits', 'utf-8');
+    let state = -1;
+    let num = '';
+
+    for(let i = 0; i < content.length; i++){
+        if(content[i] == 'm'){
+            state = state + 1;
+            continue;
+        }
+
+        if(state == order && content[i] != 'm'){
+            num = num + content[i];
+        }   
+    }
+
+    num = Number(num);
+
+    return num;
+};
+
 function Search(keyword, filter_check, filter){
     let results = new Array();
     let results_len = 0;
 
     if(filter_check == 'on'){
         let file_content = '';
-        let index = 0;
-        let next = true;
 
-        while(next){
-            fsys.readFileSync('./articles/' + String(filter) + String(index) + '.txt', 'utf-8', (err, data) =>{
-                if(err){
-                    next = false;
-                }else{
-                    file_content = data;
-                }
-            });
+        let limit = Limit(filter);
+
+        for(let i = 0; i < limit; i++){
+            file_content = fsys.readFileSync('./articles/' + String(filter) + String(i) + '.txt', 'utf-8')
 
             for(let i = 0; i < (file_content.length - keyword.length); i++){
                 let search_temp = '';
@@ -30,66 +60,50 @@ function Search(keyword, filter_check, filter){
                     results_len = results_len + 1;
                     break;
                 }
-            }
-
-            index = index + 1;
+            }      
         }
     }else{
-        let file_content = '';
-	    let index = 0;
-        let next = true;
+        let results = new Array();
+        let results_len = 0;
 
-        while(next){
-            fsys.readFileSync('./articles/' + String(index) + '.txt', 'utf-8', (err, data) =>{
-                if(err){
-                    next = false;
-                }else{
-                    file_content = data;
-                }
-            });
+        if(filter_check == 'on'){
+            let file_content = '';
 
-            for(let i = 0; i < (file_content.length - keyword.length); i++){
-                let search_temp = '';
+            let limit = Limit('');
 
-                for(let c = i; c < (c + length(keyword)); c++){
-                    search_temp = search_temp + file_content[c];
-                }
+            for(let i = 0; i < limit; i++){
+                file_content = fsys.readFileSync('./articles/' + String(i) + '.txt', 'utf-8')
 
-                if(search_temp.toLowerCase() == keyword.toLowerCase()){
-                    results[results_len] = './articles/' + String(index) + '.txt';
-                    results_len = results_len + 1;
-                    break;
-                }
+                for(let i = 0; i < (file_content.length - keyword.length); i++){
+                    let search_temp = '';
+
+                    for(let c = i; c < (c + length(keyword)); c++){
+                        search_temp = search_temp + file_content[c];
+                    }
+
+                    if(search_temp.toLowerCase() == keyword.toLowerCase()){
+                        results[results_len] = './articles/' + String(index) + '.txt';
+                        results_len = results_len + 1;
+                        break;
+                    }
+                }      
             }
-
-            index = index + 1;
         }
     }
+
+    console.log(results);
     return results;
 }
 
 function Query_Output(...args){
-    let html = '';
-
-    fsys.readFileSync('./frontend/query-begin.hmtl', 'utf-8', (err, data) => {
-        if(err){
-            return 'Error'
-        }else{
-            html = data;
-        }
-    });
+    let html = fsys.readFileSync('./frontend/query-begin.html', 'utf-8');
+        
 
     for(let i = 0; i < args.length; i++){
-        html = html + '\n' + '<a href="/view/' + String(args[i]) + '" class="w3-container">' + String(args[i]) + '</a>'
+        html = html + '\n' + '<a href="/view/' + String(args[i]) + '" class="w3-container">' + String(args[i]) + '</a>';
     }
 
-    fsys.readFileSync('./frontend/query-end.hmtl', 'utf-8', (err, data) => {
-        if(err){
-            return 'Error'
-        }else{
-            html = data;
-        }
-    });
+    html = html + fsys.readFileSync('./frontend/query-end.html', 'utf-8');
 
     return html;
 }

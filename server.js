@@ -8,8 +8,6 @@ const utils = require('./utils');
 
 http.createServer(function (req, res) {
     res.writeHead(200, { 'Content-Type': 'text/html' });
-    let aux_url = req.url[0] + req.url[1] + req.url[2] + req.url[3] + req.url[4] + req.url[5];
-    let ter_url = req.url[0] + req.url[1] + req.url[2] + req.url[3] + req.url[4];
 
     const parsedUrl = url.parse(req.url, true);
     const pathname = parsedUrl.pathname;
@@ -63,7 +61,7 @@ http.createServer(function (req, res) {
             values['filter-check'] = 'off';
         }
 
-        query_filepaths = utils.Search(values[keyword], values[filter-check], values[filter]);
+        query_filepaths = utils.Search(values['keyword'], values['filter-check'], values['filter']);
         html = utils.Query_Output(query_filepaths);
         res.write(html);
 
