@@ -16,7 +16,7 @@ const Utility = new Utilities();
 
 function Limit(filter){
     let order = Utility.order[filter];
-    let content = fsys.readFileSync('./limits', 'utf-8');
+    let content = fsys.readFileSync('./limits.txt', 'utf-8');
     let state = -1;
     let num = '';
 
@@ -42,21 +42,22 @@ function Search(keyword, filter_check, filter){
 
     if(filter_check == 'on'){
         let file_content = '';
+        let search_temp = '';
 
         let limit = Limit(filter);
 
-        for(let i = 0; i < limit; i++){
-            file_content = fsys.readFileSync('./articles/' + String(filter) + String(i) + '.txt', 'utf-8')
+        for(let g = 0; g < limit; g++){
+            file_content = fsys.readFileSync('./articles/' + String(filter) + String(g) + '.txt', 'utf-8')
 
             for(let i = 0; i < (file_content.length - keyword.length); i++){
-                let search_temp = '';
+                search_temp = '';
 
-                for(let c = i; c < (c + length(keyword)); c++){
+                for(let c = i; c < (c + keyword.length); c++){
                     search_temp = search_temp + file_content[c];
                 }
 
                 if(search_temp.toLowerCase() == keyword.toLowerCase()){
-                    results[results_len] = './articles/' + String(index) + '.txt';
+                    results[results_len] = './articles/' + String(g) + '.txt';
                     results_len = results_len + 1;
                     break;
                 }
@@ -64,26 +65,27 @@ function Search(keyword, filter_check, filter){
         }
     }else{
         let file_content = '';
+        let search_temp = '';
 
         let limit = Limit('');
-        console.log(limit);
 
-        for(let i = 0; i < limit; i++){
-            file_content = fsys.readFileSync('./articles/' + String(i) + '.txt', 'utf-8')
+        for(let g = 0; g < limit; g++){
+            file_content = fsys.readFileSync('./articles/' + String(g) + '.txt', 'utf-8')
+            //the above functions
 
             for(let i = 0; i < (file_content.length - keyword.length); i++){
-                let search_temp = '';
+                search_temp = '';
 
-                for(let c = i; c < (c + length(keyword)); c++){
+                for(let c = i; c < (i + keyword.length); c++){
                     search_temp = search_temp + file_content[c];
                 }
 
                 if(search_temp.toLowerCase() == keyword.toLowerCase()){
-                    results[results_len] = './articles/' + String(index) + '.txt';
+                    results[results_len] = './articles/' + String(g) + '.txt';
                     results_len = results_len + 1;
                     break;
                 }
-            }      
+            }
         }
         
     }
