@@ -24,26 +24,20 @@ http.createServer(function (req, res) {
         let html = fs.readFileSync('./frontend/search.html');
         res.write(html); 
     }else if(pathname == '/creation'){
-        let RequestBody = '';
-        let valid = true;
-        req.on('data', function(data){
-            RequestBody = RequestBody + data;
+        let values = new Object();
 
-            if(RequestBody.length > 1e7){
-                valid = false;
-                req.url = '/tldr';
-            }
-        });
+        values['filter-check'] = query['filter-check'];
 
-        if (valid){
-            req.end('end', function(){
-                let form_data = qs.parse(RequestBody);
-                utils.Create_Save(form_data.title, form_data.content, form_data.filter_check, form_data.filter);
-
-                let html = fs.readFileSync('./frontend/index.html');
-                res.write(html);    
-            });
+        try{
+            console.log(values['filter-check'].length);
+        }catch{
+            values['filter-check'] = 'off';
         }
+
+        utils.Create_Save(query['title'], query['content'], values['filter-check'], query['filter']);
+
+        let html = fs.readFileSync('./frontend/index.html');
+        res.write(html);
     }else if(pathname == '/query'){
         let html = '';
         let state = 0;

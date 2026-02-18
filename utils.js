@@ -36,6 +36,47 @@ function Limit(filter){
     return num;
 };
 
+function Change_Limit(filter){
+    let order = Utility.order[filter];
+    let content = fsys.readFileSync('./limits.txt', 'utf-8');
+    let state = -2;
+    let nums = [];
+    let num = ''
+
+    for(let i = 0; i < content.length; i++){
+        if(content[i] == 'm' && state >= -1){
+            state = state + 1;
+            num = Number(num);
+            nums[state] = num;
+            num = '';
+            continue;
+        }else if(content[i] == 'm'){
+            state = state + 1;
+            continue;
+        }
+
+        if(i == content.length - 1){
+            num = num + content[i];
+            num = Number(num);
+            nums[state + 1] = num;
+            num = '';
+            continue;
+        }
+
+        if(content[i] != 'm'){
+            num = num + content[i];
+        }   
+    }
+
+    console.log(nums);
+
+    nums[order] = nums[order] + 1;
+
+    let text =  'm' + nums[0] + 'm' + nums[1] + 'm' + nums[2] + 'm' + nums[3] + 'm' + nums[4] + 'm' + nums[5] + 'm' + nums[6];
+    fsys.writeFileSync('./limits.txt', text, 'utf-8');
+
+}
+
 function Search(keyword, filter_check, filter){
     let results = new Array();
     let results_len = 0;
@@ -148,40 +189,25 @@ function View(path){
 }
 
 function Create_Save(title, content, filter_check, filter){
-    if (filter_check == 'on'){
-        let index = 0;
-        let created = true;
+    let created = true;
+    let limit = 0;
 
-        while(created){
-            fsys.readFile('./articles/' + String(filter) + '-' + String(index), 'utf-8', (err, data) => {
-                if(err){
-                    created = false;
-                }else{
-                    index = index + 1;
-                }
-            })
-        }
-
-        let text = '[name]=' + String(title) + '\n[content]=' + String(content);
-        fsys.writeFile('./articles/' + index, text, 'utf-8');
-        
+    if(filter_check == 'on'){
+        limit = Limit(filter);
     }else{
-        let index = 0;
-        let created = true;
-
-        while(created){
-            fsys.readFile('./articles/' + String(index), 'utf-8', (err, data) => {
-                if(err){
-                    created = false;
-                }else{
-                    index = index + 1;
-                }
-            })
-        }
-
-        let text = '[name]=' + String(title) + '\n[content]=' + String(content);
-        fsys.writeFile('./articles/' + String(index), text, 'utf-8');
+        limit = Limit('');
     }
+
+    let text = '[name]=' + String(title) + '\n[content]=' + String(content);
+    fsys.writeFileSync('./articles/' + String(limit) + '.txt', text, 'utf-8');
+
+    if(filter_check == 'on'){
+        Change_Limit(filter);
+    }else{
+        Change_Limit('');
+    }
+    
+    return;
 }
 
 module.exports = {Search, Create_Save ,Query_Output, View};
