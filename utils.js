@@ -47,17 +47,17 @@ function Search(keyword, filter_check, filter){
         let limit = Limit(filter);
 
         for(let g = 0; g < limit; g++){
-            file_content = fsys.readFileSync('./articles/' + String(filter) + String(g) + '.txt', 'utf-8')
+            file_content = fsys.readFileSync('./articles/' + String(filter) + '-' +  String(g) + '.txt', 'utf-8')
 
             for(let i = 0; i < (file_content.length - keyword.length); i++){
                 search_temp = '';
 
-                for(let c = i; c < (c + keyword.length); c++){
+                for(let c = i; c < (i + keyword.length); c++){
                     search_temp = search_temp + file_content[c];
                 }
 
                 if(search_temp.toLowerCase() == keyword.toLowerCase()){
-                    results[results_len] = './articles/' + String(g) + '.txt';
+                    results[results_len] = './articles/' + String(filter) + '-' +  String(g) + '.txt';
                     results_len = results_len + 1;
                     break;
                 }
@@ -132,37 +132,17 @@ function Clean_Text(text){
 }
 
 function View(path){
-    let raw_text = '';
+    let raw_text = fsys.readFileSync(String(path), 'utf-8');
     let html = '';
 
-    fsys.readFileSync('./articles/' + String(path), 'utf-8', (err, data) => {
-        if(err){
-            return 'Error'
-        }else{
-            raw_text = data;
-        }
-    });
+    let clean_text = Clean_Text(raw_text);
 
-    let clean_text = Clean_Text(text);
-
-    fsys.readFileSync('./frontend/view-begin.hmtl', 'utf-8', (err, data) => {
-        if(err){
-            return 'Error'
-        }else{
-            html = data;
-        }
-    });
+    html = html + fsys.readFileSync('./frontend/view-begin.html', 'utf-8');
 
     html = html + '<h1 class="w3-container">' + clean_text[0] + '</h1>\n';
     html = html + '<p class="w3-container">' + clean_text[1] + '</p>\n';
 
-    fsys.readFileSync('./frontend/view-end.hmtl', 'utf-8', (err, data) => {
-        if(err){
-            return 'Error'
-        }else{
-            html = data;
-        }
-    });
+    html = html + fsys.readFileSync('./frontend/view-end.html', 'utf-8');
 
     return html;
 }

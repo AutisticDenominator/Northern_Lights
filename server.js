@@ -8,6 +8,7 @@ const utils = require('./utils');
 
 http.createServer(function (req, res) {
     res.writeHead(200, { 'Content-Type': 'text/html' });
+    let view_url = req.url[0] + req.url[1] + req.url[2] + req.url[3] + req.url[4];
 
     const parsedUrl = url.parse(req.url, true);
     const pathname = parsedUrl.pathname;
@@ -65,7 +66,7 @@ http.createServer(function (req, res) {
         html = utils.Query_Output(query_filepaths);
         res.write(html);
 
-    }else if(pathname == '/view'){
+    }else if(view_url == '/view'){
         let path = '';
 
         for(let i = 6; i < req.url.length; i++){
