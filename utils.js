@@ -63,35 +63,32 @@ function Search(keyword, filter_check, filter){
             }      
         }
     }else{
-        let results = new Array();
-        let results_len = 0;
+        let file_content = '';
 
-        if(filter_check == 'on'){
-            let file_content = '';
+        let limit = Limit('');
+        console.log(limit);
 
-            let limit = Limit('');
+        for(let i = 0; i < limit; i++){
+            file_content = fsys.readFileSync('./articles/' + String(i) + '.txt', 'utf-8')
 
-            for(let i = 0; i < limit; i++){
-                file_content = fsys.readFileSync('./articles/' + String(i) + '.txt', 'utf-8')
+            for(let i = 0; i < (file_content.length - keyword.length); i++){
+                let search_temp = '';
 
-                for(let i = 0; i < (file_content.length - keyword.length); i++){
-                    let search_temp = '';
+                for(let c = i; c < (c + length(keyword)); c++){
+                    search_temp = search_temp + file_content[c];
+                }
 
-                    for(let c = i; c < (c + length(keyword)); c++){
-                        search_temp = search_temp + file_content[c];
-                    }
-
-                    if(search_temp.toLowerCase() == keyword.toLowerCase()){
-                        results[results_len] = './articles/' + String(index) + '.txt';
-                        results_len = results_len + 1;
-                        break;
-                    }
-                }      
-            }
+                if(search_temp.toLowerCase() == keyword.toLowerCase()){
+                    results[results_len] = './articles/' + String(index) + '.txt';
+                    results_len = results_len + 1;
+                    break;
+                }
+            }      
         }
+        
     }
 
-    console.log(results);
+    //passing an empty list -- todo I guess
     return results;
 }
 
